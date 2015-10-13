@@ -7,8 +7,8 @@ class Person
     self.current_floor = 0
   end   
 
-  def enter_lift
-  end
+  # def enter_lift
+  # end
 
 end
 
@@ -16,3 +16,5 @@ end
 
 Person needs to know either what lift they're in, or what building they're in in order
 to implement an enter_lift method in the Person class?
+
+=end
