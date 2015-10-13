@@ -15,16 +15,15 @@ man_at_arms = Person.new(name: "Man at Arms", destination: 2)
 skeletor = Person.new(name: "Skeletor", destination: 0)
 
 # People enter Castle Grey Skull
-castle_grey_skull.enter he_man 
-castle_grey_skull.enter cringer
-castle_grey_skull.enter man_at_arms
-castle_grey_skull.enter skeletor
+[he_man, cringer, man_at_arms, skeletor].each { |person| castle_grey_skull.enter(person) } 
 
-binding.pry
+#binding.pry
 
-castle_grey_skull.lifts[0].enter he_man
+castle_grey_skull.lifts[0].enter he_man # do this without specifying lift - e.g. "he_man.enter_lift"
 4.times { castle_grey_skull.lifts[0].go_up }
 castle_grey_skull.lifts[0].get_out he_man
+
+# have someone else enter a lift - make sure they're entering a different lift as the first one is now on f4
 
 
 # The stuff below isn't fully implemented yet. Some of it works, some of it doesn't.
@@ -34,7 +33,7 @@ castle_grey_skull.lifts[0].get_out he_man
 
 
 
-raise
+#raise
 
 
 
@@ -88,8 +87,7 @@ end
 
 
 
-#binding.pry
-""
+binding.pry;""
 
 
 

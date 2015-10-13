@@ -31,4 +31,12 @@ class Lift
     self.current_floor -= 1
   end
 
+  # distance to floor
+
+  # def travel_to(floor)
+  # passengers.each { |p| pasenger.floor = floor}
+  # self.floor = floor.to_i
+
+  # instances set only in one place. if something only has a reader it can have an instance var instead of self.name
+
 end
