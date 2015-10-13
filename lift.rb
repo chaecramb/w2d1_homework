@@ -18,8 +18,7 @@ class Lift
   end
 
   def get_out(passenger)
-    self.passengers.delete(passenger)
-    building.occupants << passenger
+    building.occupants << self.passengers.delete(passenger)
   end
 
   def go_up
@@ -29,6 +28,7 @@ class Lift
 
   def go_down
     self.current_floor -= 1
+    passengers.each { |passenger| passenger.current_floor -= 1 }
   end
 
   # distance to floor
