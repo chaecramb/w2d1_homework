@@ -14,7 +14,7 @@ class Lift
   end
 
   def enter(passenger)
-    passengers << passenger unless overloaded?
+    passengers << building.occupants.delete(passenger) unless overloaded?
   end
 
   def get_out(passenger)
