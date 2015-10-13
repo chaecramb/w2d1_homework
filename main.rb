@@ -11,83 +11,35 @@ castle_grey_skull = Building.new(name: "Castle Grey Skull",
 # Create people 
 he_man = Person.new(name: "He-Man", destination: 4)
 cringer = Person.new(name: "Cringer", destination: 11)
-man_at_arms = Person.new(name: "Man at Arms", destination: 2)
+man_at_arms = Person.new(name: "Man at Arms", destination: 11)
 skeletor = Person.new(name: "Skeletor", destination: 0)
 
 # People enter Castle Grey Skull
-[he_man, cringer, man_at_arms, skeletor].each { |person| castle_grey_skull.enter(person) } 
+[he_man, cringer, man_at_arms, skeletor].each { |person| person.enter_building(castle_grey_skull) } 
 
-#binding.pry
+# He-Man enters lift, goes up 4 floors, gets out onto the 4th floor
+he_man.enter_lift(castle_grey_skull.closest_lift(he_man.current_floor))
+4.times { castle_grey_skull.lifts.first.go_up }
+he_man.exit_lift(castle_grey_skull.lifts.first)
 
-castle_grey_skull.lifts[0].enter he_man # do this without specifying lift - e.g. "he_man.enter_lift"
-4.times { castle_grey_skull.lifts[0].go_up }
-castle_grey_skull.lifts[0].get_out he_man
-
-# have someone else enter a lift - make sure they're entering a different lift as the first one is now on f4
-
-
-# The stuff below isn't fully implemented yet. Some of it works, some of it doesn't.
-# The working part is basically what's above - people can be moved around manually
-# like in lines 25 to 27.
-
-
-
-
-#raise
-
-
-
-
-# For each person, check if they are on the floor they want to be on
-castle_grey_skull.occupants.each do |person|
-  unless person.destination == person.current_floor
-    # If they are not check what the closest life is
-    closest_lift = castle_grey_skull.closest_lift(person.current_floor)
-
-    # Bring closest lift to person's floor, unless it is already there.
-    unless closest_lift.current_floor == person.current_floor
-      until closest_lift.current_floor == person.current_floor
-        if closest_lift.current_floor > person.current_floor
-          closest_lift.go_down
-        else
-          closest_lift.go_up
-        end
-      end
-    end
-
-    # Person enters the lift
-    closest_lift.enter person
-
-    # Person is removed from Castle Grey Skull occupancy
-    castle_grey_skull.occupants.delete(person)
-  end
-  
+# Cringer and Man-at-Arms enter lift
+# It's a different one this time as the closest lift if no longer the first lift which is now on 4
+[cringer, man_at_arms].each do |person|
+  person.enter_lift(castle_grey_skull.closest_lift(he_man.current_floor))
 end
 
-# Each lift with people in it will procede the their destination floors in order,
-# and the people will exit the lift. 
-castle_grey_skull.lifts.each do |lift|
-  if lift.passengers.any?
-    lift.passengers.sort! { |a,b| a.destination <=> b.destination }
-    lift.passengers.each do |passenger|
-      until passenger.destination == lift.current_floor
-        if lift.current_floor > passenger.current_floor
-          lift.go_down
-        else
-          lift.go_up
-        end
-      passengers_exitting = lift.passengers.select do |passenger| 
-        passenger.destination == lift.current_floor
-      end
-      # binding.pry
-      end
-    end
-  end
+# They try to go up 99 floors, but can't because Castle Grey Skull only has 11
+99.times { castle_grey_skull.lifts[1].go_up }
+
+# Cring and Man-at-Arms exit the lift onto the 11th floor
+[cringer, man_at_arms].each do |person|
+  person.exit_lift(castle_grey_skull.lifts[1])
 end
 
+binding.pry
 
 
-binding.pry;""
+
 
 
 
