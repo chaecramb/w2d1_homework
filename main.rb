@@ -4,7 +4,6 @@ require_relative "lift"
 require_relative "person"
 
 castle_grey_skull = Building.new(name: "Castle Grey Skull", 
-  post_code: "PH3 9DR",
   floors: "11",
   lifts: 4  )
 
