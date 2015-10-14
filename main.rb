@@ -35,7 +35,7 @@ end
   person.exit_lift(castle_grey_skull.lifts[1])
 end
 
-binding.pry
+binding.pry;''
 
 
 
